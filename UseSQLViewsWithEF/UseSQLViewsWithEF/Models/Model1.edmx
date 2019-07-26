@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ABC_Company_DBModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmpDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Developer_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Salary" Type="int" />
+        </EntityType>
+        <EntityType Name="OutstandingAndActiveProjects">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Project_Title" Type="varchar" MaxLength="50" />
+          <Property Name="Tasks_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Estimation_Date" Type="datetime" />
+          <Property Name="Developer_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ABC_Company_DB.dbo.MyViewSanss' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MyViewSanss">
+          <Property Name="Tasks_Name" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="Salary" Type="int" />
+        </EntityType>-->
+        <Association Name="FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects">
+          <End Role="OutstandingAndActiveProjects" Type="Self.OutstandingAndActiveProjects" Multiplicity="1" />
+          <End Role="OutstandingAndActiveProjects1" Type="Self.OutstandingAndActiveProjects" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OutstandingAndActiveProjects">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="OutstandingAndActiveProjects1">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="getAllDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ABC_Company_DBModel2StoreContainer">
+          <EntitySet Name="EmpDetails" EntityType="Self.EmpDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OutstandingAndActiveProjects" EntityType="Self.OutstandingAndActiveProjects" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects" Association="Self.FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects">
+            <End Role="OutstandingAndActiveProjects" EntitySet="OutstandingAndActiveProjects" />
+            <End Role="OutstandingAndActiveProjects1" EntitySet="OutstandingAndActiveProjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ABC_Company_DBModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ABC_Company_DBEntities2" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="EmpDetails" EntityType="ABC_Company_DBModel2.EmpDetail" />
+          <EntitySet Name="OutstandingAndActiveProjects" EntityType="ABC_Company_DBModel2.OutstandingAndActiveProject" />
+          <AssociationSet Name="FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects" Association="ABC_Company_DBModel2.FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects">
+            <End Role="OutstandingAndActiveProject" EntitySet="OutstandingAndActiveProjects" />
+            <End Role="OutstandingAndActiveProject1" EntitySet="OutstandingAndActiveProjects" />
+          </AssociationSet>
+          <FunctionImport Name="getAllDetails" ReturnType="Collection(ABC_Company_DBModel2.getAllDetails_Result)" />
+        </EntityContainer>
+        <EntityType Name="EmpDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Developer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Int32" />
+        </EntityType>
+        <EntityType Name="OutstandingAndActiveProject">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Project_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tasks_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estimation_Date" Type="DateTime" Precision="3" />
+          <Property Name="Developer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OutstandingAndActiveProjects1" Relationship="ABC_Company_DBModel2.FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects" FromRole="OutstandingAndActiveProject" ToRole="OutstandingAndActiveProject1" />
+          <NavigationProperty Name="OutstandingAndActiveProject1" Relationship="ABC_Company_DBModel2.FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects" FromRole="OutstandingAndActiveProject1" ToRole="OutstandingAndActiveProject" />
+        </EntityType>
+        <Association Name="FK_OutstandingAndActiveProjects_OutstandingAndActiveProjects">
+          <End Type="ABC_Company_DBModel2.OutstandingAndActiveProject" Role="OutstandingAndActiveProject" Multiplicity="1" />
+          <End Type="ABC_Company_DBModel2.OutstandingAndActiveProject" Role="OutstandingAndActiveProject1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OutstandingAndActiveProject">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="OutstandingAndActiveProject1">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="getAllDetails_Result">
+          <Property Type="String" Name="Tasks_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Salary" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ABC_Company_DBModel2StoreContainer" CdmEntityContainer="ABC_Company_DBEntities2" >
+          <EntitySetMapping Name="EmpDetails">
+            <EntityTypeMapping TypeName="ABC_Company_DBModel2.EmpDetail">
+              <MappingFragment StoreEntitySet="EmpDetails">
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Developer_Name" ColumnName="Developer_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutstandingAndActiveProjects">
+            <EntityTypeMapping TypeName="ABC_Company_DBModel2.OutstandingAndActiveProject">
+              <MappingFragment StoreEntitySet="OutstandingAndActiveProjects">
+                <ScalarProperty Name="Developer_Name" ColumnName="Developer_Name" />
+                <ScalarProperty Name="Estimation_Date" ColumnName="Estimation_Date" />
+                <ScalarProperty Name="Tasks_Name" ColumnName="Tasks_Name" />
+                <ScalarProperty Name="Project_Title" ColumnName="Project_Title" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getAllDetails" FunctionName="ABC_Company_DBModel2.Store.getAllDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ABC_Company_DBModel2.getAllDetails_Result">
+                <ScalarProperty Name="Tasks_Name" ColumnName="Tasks_Name" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
