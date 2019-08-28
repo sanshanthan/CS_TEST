@@ -158,6 +158,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ManyToManyRelationships\Course.cs" />
+    <Compile Include="ManyToManyRelationships\ManyToManyDbContext.cs" />
+    <Compile Include="ManyToManyRelationships\Student.cs" />
     <Compile Include="OneToManyRelationships\Grade.cs" />
     <Compile Include="OneToManyRelationships\OneToManyDbContext.cs" />
     <Compile Include="OneToManyRelationships\Student.cs" />
