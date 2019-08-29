@@ -1,5 +1,28 @@
-﻿@{
+﻿@model IEnumerable<DBRelationshipsEF.OneToOneRelationship.Student>
+@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>DB CREATED</h1>
+<table class="table ">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    @foreach (var i in Model)
+    {
+    <tbody>
+        <tr>
+            <td>@i.StudentId</td>
+            <td>@i.StudentName</td>
+            <td>
+                <button type="button" class="btn btn-primary">EDIT</button>
+                <button type="button" class="btn btn-danger">DELETE</button>
+            </td>
+        </tr>
+    </tbody>
+    }
+    </table>

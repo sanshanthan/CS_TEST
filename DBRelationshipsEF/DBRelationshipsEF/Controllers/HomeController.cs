@@ -1,4 +1,5 @@
 ﻿using DBRelationshipsEF.ManyToManyRelationships;
+using DBRelationshipsEF.Models;
 using DBRelationshipsEF.OneToManyRelationships;
 using DBRelationshipsEF.OneToOneRelationship;
 using System;
@@ -16,8 +17,9 @@ namespace DBRelationshipsEF.Controllers
         ManyToManyDbContext db3 = new ManyToManyDbContext();
 
         public ActionResult Index()
-        {    
-            return View(db3.Students.ToList());
+        {
+            //MoviesEntities me = new MoviesEntities();
+            return View(db.students.ToList());
         }
 
         public ActionResult About()
